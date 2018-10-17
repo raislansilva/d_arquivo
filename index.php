@@ -1,6 +1,23 @@
 <?php
-    // Aqui vale qualquer coisa, desde que seja um diretório seguro :)
-    define('DIR_DOWNLOAD', '../download/');
+    
+    $con = new PDO("mysql:dbname=arquivoB; host=localhost","root","");
+
+    $stmt = $con->prepare("SELECT arquivo FROM boleto where id=1");
+    $result = $stmt->execute();
+    
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $url;
+
+    foreach($result as $res){
+       $url = $res['arquivo']; 
+    }
+
+    
+    //echo $url;
+     
+    /*// Aqui vale qualquer coisa, desde que seja um diretório seguro :)
+    define('DIR_DOWNLOAD', '../xampp/htdocs/img/');
     // Vou dividir em passos a criação da variável $arquivo pra ficar mais fácil de entender, mas você pode juntar tudo
     $arquivo = $_GET['arquivo'];
     // Retira caracteres especiais
@@ -19,6 +36,25 @@
     header('Content-Length: '.filesize($caminho_download));
     // Busca todo o arquivo e joga o seu conteúdo para que possa ser baixado
     readfile($caminho_download);
-    exit;
+    exit;*/
+
+
+    
+    //$url="../../../Users/raisl/Downloads/Documents/10.pdf";
+
+
+    if (file_exists($url)) {
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="'.basename($url).'"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($url));
+        readfile($url);
+        exit;
+    }else{
+        echo "Arquivo Não existe";
+    }
 ?>
 
