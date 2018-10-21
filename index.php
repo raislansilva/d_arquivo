@@ -42,19 +42,16 @@
     
     //$url="../../../Users/raisl/Downloads/Documents/10.pdf";
 
+        $arquivo = $_GET['arquivo'];
 
-    if (file_exists($url)) {
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="'.basename($url).'"');
+        header('Content-Disposition: attachment; filename="'.basename($arquivo).'"');
         header('Expires: 0');
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
-        header('Content-Length: ' . filesize($url));
-        readfile($url);
+        header('Content-Length: ' . filesize($arquivo));
+        readfile($arquivo);
         exit;
-    }else{
-        echo "Arquivo Não existe";
-    }
 ?>
 
