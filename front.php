@@ -1,8 +1,6 @@
 <?php
 
- $arquivos = ['arquivo1', 'arquivo2'];
-
-
+$arquivos = ['NOTIFIC07052014.12190','NOTIFIC07052014.12190R'];
 
 ?>
 
@@ -19,12 +17,18 @@
                     <td><a><?php echo $arquivo ?></a></td>
 
                     <?php if(file_exists('matriz')){ ?>  
+                        <?php
+                            $id = $arquivo;
+                            $array = explode('.',$arquivo); 
+                            $ref = $array[1];
+                            $n_arquivo =  $id[0].$ref;
+                        ?>
                     
-                        <?php switch($arquivo) { 
-                                case "arquivo1":
+                        <?php switch($n_arquivo) { 
+                                case "N12190R":
                                 echo '<td><a href="index.php?arquivo=notificacao_RADAR.indd" title="notificacao_RADAR.indd">baixar</a></td>';
                                 break;
-                                case "arquivo2":
+                                case "N12190":
                                 echo '<td><a href="index.php?arquivo=notificacao_TALÃO.indd" title="notificacao_TALÃO.indd">baixar</a></td>';
                                 break;
                         } ?>
